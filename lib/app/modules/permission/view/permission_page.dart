@@ -4,6 +4,7 @@ import 'package:fibotech/app/modules/home/cubit/home_cubit.dart';
 import 'package:fibotech/app/modules/permission/cubit/permission_page_cubit.dart';
 import 'package:fibotech/core/mixin/after_first_layout_mixin.dart';
 import 'package:fibotech/data/enums.dart';
+import 'package:fibotech/data/provider/local/cubit/session_cubit.dart';
 import 'package:fibotech/widgets/container_box_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,7 +32,7 @@ class _PermissionPageState extends State<PermissionPage>  with AfterFirstLayoutM
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return  BlocProvider(
-      create: (context) => PagePermissionCubit(homeCubit: context.read<HomeCubit>(), controller: controller, ),
+      create: (context) => PagePermissionCubit(sessionCubit: context.read<SessionCubit>(), controller: controller, ),
       child: Scaffold(
           appBar: AppBar(title: const Text('Permisos')),
           body: BlocBuilder<PagePermissionCubit, PagePermissionState>(

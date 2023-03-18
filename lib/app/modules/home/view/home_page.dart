@@ -4,15 +4,27 @@ import 'package:fibotech/data/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => HomeCubit(),
+      child: const HomePageLogic(),
+    );
+  }
+}
+
+class HomePageLogic extends StatefulWidget {
+  const HomePageLogic({Key? key}) : super(key: key);
+
+  @override
+  State<HomePageLogic> createState() => _HomePageLogicState();
 }
 
 
-class _HomePageState extends State<HomePage> {
+class _HomePageLogicState extends State<HomePageLogic> {
 
   @override
   void initState() {

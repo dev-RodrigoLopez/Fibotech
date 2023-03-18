@@ -33,7 +33,7 @@ Route<dynamic> Function(RouteSettings) get routes => (RouteSettings settings) {
           break;
         default:
           route = MaterialPageRoute<dynamic>(
-            builder: (_) => const HomePage(),
+            builder: (_) => const PermissionPage(),
             settings: RouteSettings(name: settings.name),
           );
           break;

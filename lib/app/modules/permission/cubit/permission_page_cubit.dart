@@ -6,18 +6,18 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:fibotech/app/modules/home/cubit/home_cubit.dart';
 import 'package:fibotech/core/utils/utils.dart';
 import 'package:fibotech/data/enums.dart';
+import 'package:fibotech/data/provider/local/cubit/session_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
 part 'permission_page_state.dart';
 
 class PagePermissionCubit extends Cubit<PagePermissionState> {
-  PagePermissionCubit({required this.homeCubit,required this.controller, }) : super( const PagePermissionState());
+  PagePermissionCubit({required this.sessionCubit,required this.controller, }) : super( const PagePermissionState());
 
-  final HomeCubit homeCubit; 
+  final SessionCubit sessionCubit; 
   final PageController controller; 
    static final gpsIsActive = Geolocator.getServiceStatusStream();
   StreamSubscription<dynamic>?  listen; 
@@ -44,7 +44,7 @@ class PagePermissionCubit extends Cubit<PagePermissionState> {
               try{
                 final laststate = state.statusPermission;
                 emit(state.copyWith(statusPermission: Platform.isAndroid ?  GpsPermissionStatus.waiting : GpsPermissionStatus.pure));
-                if(Platform.isAndroid)homeCubit.alertGps();
+                if(Platform.isAndroid)sessionCubit.alertGps();
                 if(Platform.isIOS && laststate != GpsPermissionStatus.notactivated)await controller.animateToPage(1, duration: const Duration(milliseconds: 500),curve: Curves.easeIn);
                
               }
@@ -67,7 +67,7 @@ class PagePermissionCubit extends Cubit<PagePermissionState> {
     final request = await Utils.requestpermitionCheckGps();
     if (request == GpsPermissionStatus.successFull) {
       if(Platform.isAndroid) {
-        homeCubit.alertGps();  
+        sessionCubit.alertGps();  
         return;           
       }
       await controller.animateToPage(1, duration: const Duration(milliseconds: 500),curve: Curves.easeIn);
@@ -80,7 +80,7 @@ class PagePermissionCubit extends Cubit<PagePermissionState> {
 
   Future<void> getAppTransparency() async {    
     await Permission.appTrackingTransparency.request();
-    homeCubit.alertGps();
+    sessionCubit.alertGps();
   }
 
 

@@ -3,95 +3,18 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:fibotech/core/singleton/user_preferences_singletons.dart';
-import 'package:fibotech/core/utils/utils.dart';
 import 'package:fibotech/data/enums.dart';
 import 'package:fibotech/data/model/model_popular_locations.dart';
 import 'package:fibotech/data/model/weather_rest_model.dart';
 import 'package:fibotech/data/provider/home/home_rest_provider.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 part 'home_state.dart';
 
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit( ) : super(const HomeState());
 
-  bool inicialitedListener = false;
-  late StreamSubscription<dynamic> listenGpsActivate;
-  static final gpsIsActive = Geolocator.getServiceStatusStream();
-
-  Future<void> verifyUser() async {
-    // if (DioSingleton.sessionCubit == null) {
-    //   DioSingleton.assingSessionCubit = this;
-    //   DioSingleton.dioInterceptor();
-    // }
-    if (await Utils.checkPermission()) {
-      final isActivate = await Geolocator.isLocationServiceEnabled();
-
-      if (!inicialitedListener) {
-        await changeStatusGps();
-      }
-
-      emit(
-        state.copyWith(
-          sessionStatus: UserPreferences.getAlert
-            ? SessionStatus.success
-            : SessionStatus.gpsbadstate,
-          viewGpsAlert: UserPreferences.getAlert,
-          checkAppApptransparency: UserPreferences.checkAppApptransparency,
-        ),
-      );
-      //await checkTokenStatus();
-      return;
-
-      // addinterceptor();
-    }
-    emit(
-      state.copyWith(
-        sessionStatus: SessionStatus.gpsbadstate,
-      ),
-    );
-  }
-    // });
-
-  void alertGps() {
-    // if(UserPreferences.getAlert != null ){
-      // final goToHome = goHome(idUsuarioTeam: UserPreferences.user!.idTeam);
-      UserPreferences.getAlert = true;
-      // UserPreferences.checkAppApptransparency = true;
-      emit(
-        state.copyWith(
-          viewGpsAlert: true,
-          sessionStatus: SessionStatus.success,
-          // checkAppApptransparency: true,
-        ),
-      );
-    // }
-  }
-
-  Future<void> changeStatusGps() async {
-    inicialitedListener = true;
-    listenGpsActivate = gpsIsActive.listen((change) async {
-      final bool = await Geolocator.isLocationServiceEnabled();
-
-      if (bool && await Permission.location.isGranted) {
-        await verifyUser();
-        return;
-      }
-      emit(
-        state.copyWith(
-          sessionStatus: SessionStatus.gpsbadstate,
-        ),
-      );
-    });
-  }
-
-  // Future<void> diposeCubit() async {
-  //   await listenGpsActivate.cancel();
-  // }
-
   Future<void> getWeatherByMyLocation() async{
-    //Primero obtenemos mi localizacion
     final location = await Geolocator.getCurrentPosition();
 
     final responsePersonal = await HomeRestProvider().getMyWeatherByLocation(

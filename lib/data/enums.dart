@@ -1,6 +1,7 @@
 enum SessionStatus {
   success,
   gpsbadstate,
+  none,
 }
 
 enum GpsPermissionStatus {

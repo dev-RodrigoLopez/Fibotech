@@ -40,13 +40,16 @@ class CardPopularWidget extends StatelessWidget {
                     SizedBox(
                       width: size.width * 0.030,
                     ),
-                    Text(
-                      weatherModel.current.weather[0].description,
-                      style: TextStyle( 
-                        color: Colors.white60,
-                        fontSize: ( weatherModel.current.weather[0].description.length > 10 ) ? size.width * 0.027 : size.width * 0.04,
-                        // fontSize: 10,
-                        fontWeight: FontWeight.w500
+                    SizedBox(
+                      width: size.width * 0.18,
+                      child: Text(
+                        weatherModel.current.weather[0].description,
+                        style: TextStyle( 
+                          color: Colors.white60,
+                          fontSize: ( weatherModel.current.weather[0].description.length > 10 ) ? size.width * 0.035 : size.width * 0.04,
+                          // fontSize: 10,
+                          fontWeight: FontWeight.w500
+                        ),
                       ),
                     ),
                   ],
