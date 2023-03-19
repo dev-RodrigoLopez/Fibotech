@@ -87,6 +87,7 @@ class Current {
         this.city = '',
         this.state = '',
         this.country = '',
+        this.postalCode = 0,
     });
 
     final int dt;
@@ -107,6 +108,7 @@ class Current {
     final String city;
     final String state;
     final String country;
+    final int postalCode;
 
 
     factory Current.fromJson(String str) => Current.fromMap(json.decode(str));
@@ -132,6 +134,7 @@ class Current {
       String? city,
       String? state,
       String? country,
+      int? postalCode,
     }) => Current(
         dt: dt ?? this.dt,
         sunrise: sunrise ?? this.sunrise,
@@ -151,6 +154,7 @@ class Current {
         state: state ?? this.state,
         country: country ?? this.country,
         weather: weather ?? this.weather,
+        postalCode: postalCode ?? this.postalCode,
     );
 
     factory Current.fromMap(Map<String, dynamic> json) => Current(

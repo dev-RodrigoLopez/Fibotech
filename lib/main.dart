@@ -1,4 +1,5 @@
 import 'package:fibotech/core/mixin/after_first_layout_mixin.dart';
+import 'package:fibotech/core/singleton/store_singleton.dart';
 import 'package:fibotech/core/singleton/user_preferences_singletons.dart';
 import 'package:fibotech/data/enums.dart';
 import 'package:fibotech/data/provider/local/cubit/session_cubit.dart';
@@ -23,6 +24,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver, AfterFirstLa
   Future<void> onAfterFirstLayout() async {
     WidgetsBinding.instance.addObserver(this);
     await UserPreferences.initPrefts();      
+    await StoreSingleton().initStore();
     await sessionCubit.verifyUser();
   }
 
@@ -33,6 +35,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver, AfterFirstLa
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    StoreSingleton().closeStore();
     super.dispose();
   }
 

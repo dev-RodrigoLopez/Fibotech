@@ -1,3 +1,4 @@
+import 'package:fibotech/core/values/const_page_names.dart';
 import 'package:flutter/material.dart';
 
 
@@ -32,9 +33,14 @@ class MenuWidget extends StatelessWidget {
             ),
           ),
           IconButton(
-            onPressed: (){},
+            onPressed: ()async {
+              await Navigator.pushNamed(
+                context,
+                PageNames.weathers,
+              );
+            },
             icon: const Icon( 
-              Icons.settings ,
+              Icons.bookmark_border ,
               color: Colors.white, 
             ),
           ),

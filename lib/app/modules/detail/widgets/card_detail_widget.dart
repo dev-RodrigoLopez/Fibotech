@@ -1,4 +1,4 @@
-import 'package:fibotech/app/modules/detail/cubit/view/widgets/item_detail_widget.dart';
+import 'package:fibotech/app/modules/detail/widgets/item_detail_widget.dart';
 import 'package:fibotech/data/model/weather_rest_model.dart';
 import 'package:flutter/material.dart';
 

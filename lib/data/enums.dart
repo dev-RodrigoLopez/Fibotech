@@ -14,3 +14,4 @@ enum GpsPermissionStatus {
 }
 
 enum HomePageStatus { loading, success, notSuccess, pure }
+enum WeatherPageStatus { loading, success, notSuccess, empty }

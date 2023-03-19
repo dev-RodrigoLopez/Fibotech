@@ -1,5 +1,4 @@
 
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:dartz/dartz.dart';
@@ -42,11 +41,15 @@ class HomeRestProvider {
       final place = placemarks.reversed.last.locality;
       final state = placemarks.reversed.last.administrativeArea;
       final country = placemarks.reversed.last.country;
+      final postalCode = placemarks.reversed.last.postalCode;
+
+      int postal = int.parse( postalCode ?? '0' );
 
       final currentCopy = response.current.copyWith(
         city: place,
         state: state,
         country:country,
+        postalCode: postal,
       );
 
       final data = response.copyWith(

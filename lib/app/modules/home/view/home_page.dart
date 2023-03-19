@@ -1,5 +1,6 @@
 import 'package:fibotech/app/modules/home/cubit/home_cubit.dart';
 import 'package:fibotech/app/modules/home/widgets/home_body.dart';
+import 'package:fibotech/app/modules/home/widgets/home_loading_widget.dart';
 import 'package:fibotech/data/enums.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -45,9 +46,7 @@ class _HomePageLogicState extends State<HomePageLogic> {
           switch( state.homePageStatus ){
             case HomePageStatus.pure:
             case HomePageStatus.loading:
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return const HomeLoadingWidget();
             case HomePageStatus.success:
               return HomeBodyWidget( 
                 weatherModel: state.weatherModel!, 

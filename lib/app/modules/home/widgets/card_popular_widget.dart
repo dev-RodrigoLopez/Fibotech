@@ -32,7 +32,7 @@ class CardPopularWidget extends StatelessWidget {
                 Row(
                   children:  [
                     GradosWidget(
-                      temp: Utils.roundOutGrades( weatherModel.current.temp ),
+                      temp: Utils.roundOutGrades( weatherModel.current.temp * 1.0 ),
                       sizeFontTemp: 18,
                       sizeFontGrade: 13,
                       isEsp: true,

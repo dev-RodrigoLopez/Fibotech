@@ -1,4 +1,3 @@
-import 'package:fibotech/app/modules/detail/cubit/view/detail_weather.dart';
 import 'package:fibotech/app/modules/home/widgets/card_popular_widget.dart';
 import 'package:fibotech/core/values/const_page_names.dart';
 import 'package:fibotech/data/model/weather_rest_model.dart';
