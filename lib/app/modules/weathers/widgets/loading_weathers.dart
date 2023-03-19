@@ -1,10 +1,5 @@
-import 'package:fibotech/app/modules/weathers/cubit/weather_cubit.dart';
-import 'package:fibotech/app/modules/weathers/widgets/card_weathers_ob.dart';
-import 'package:fibotech/core/values/const_page_names.dart';
-import 'package:fibotech/data/model/weather_model_ob.dart';
 import 'package:fibotech/widgets/search_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shimmer/shimmer.dart';
 
 class LoadingWeathers extends StatelessWidget {

@@ -2,6 +2,7 @@ import 'package:fibotech/app/modules/home/cubit/home_cubit.dart';
 import 'package:fibotech/app/modules/home/widgets/home_body.dart';
 import 'package:fibotech/app/modules/home/widgets/home_loading_widget.dart';
 import 'package:fibotech/data/enums.dart';
+import 'package:fibotech/widgets/page_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -37,7 +38,7 @@ class _HomePageLogicState extends State<HomePageLogic> {
   }
   @override
   Widget build(BuildContext context) {
-
+    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white10,
       body: BlocBuilder<HomeCubit, HomeState>(
@@ -54,9 +55,12 @@ class _HomePageLogicState extends State<HomePageLogic> {
               );
              
             case HomePageStatus.notSuccess:
-              return const Center(
-                child: Text('ERROR AL SUBIR'),
-              );
+            return ErrorWidgetPage(
+              reload: () {
+                final homeCubit = context.read<HomeCubit>();
+                homeCubit.reload();
+              },
+            );
           }
         },
       ),

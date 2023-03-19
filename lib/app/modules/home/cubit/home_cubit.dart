@@ -14,6 +14,15 @@ part 'home_state.dart';
 class HomeCubit extends Cubit<HomeState> {
   HomeCubit( ) : super(const HomeState());
 
+  Future<void> reload() async{
+    emit(
+      state.copyWith(
+        homePageStatus: HomePageStatus.loading,
+      ),
+    );
+    await getWeatherByMyLocation();
+  }
+
   Future<void> getWeatherByMyLocation() async{
     final location = await Geolocator.getCurrentPosition();
 

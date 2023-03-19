@@ -10,6 +10,15 @@ part 'weather_state.dart';
 class WeatherCubit extends Cubit<WeatherState> {
   WeatherCubit() : super(const WeatherState());
 
+  Future<void> reload() async{
+    emit(
+      state.copyWith(
+        statuPage: WeatherPageStatus.loading,
+      ),
+    );
+    await getWeatherFromDB();
+  }
+
   Future<void> getWeatherFromDB() async{
 
     final lweather = WeatherController().getAll();

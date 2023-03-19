@@ -70,12 +70,19 @@ class CardPopularWidget extends StatelessWidget {
                 ),
               ],
             ),
-            FadeInImage(
-              image: NetworkImage('https://openweathermap.org/img/wn/${weatherModel.current.weather[0].icon}@2x.png'),
-              placeholder: const AssetImage('assets/images/weather.gif'),
+            FadeInImage.assetNetwork(
+              placeholder: 'assets/images/weather.gif', 
+              image:  'https://openweathermap.org/img/wn/${weatherModel.current.weather[0].icon}@2x.png' ,
               width: size.height * 0.10,
-              height: size.height * 0.10,
+              height: size.height * 0.10, 
+              fit: BoxFit.fill,
             ),
+            // FadeInImage(
+            //   image: NetworkImage('https://openweathermap.org/img/wn/${weatherModel.current.weather[0].icon}@2x.png'),
+            //   placeholder: const AssetImage('assets/images/weather.gif'),
+            //   width: size.height * 0.10,
+            //   height: size.height * 0.10,
+            // ),
           ],
         ),
       ),

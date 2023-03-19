@@ -28,15 +28,22 @@ class DailyWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          FadeInImage(
-            image: NetworkImage(
-              'https://openweathermap.org/img/wn/$urlImg@2x.png',
-              scale: 1
-            ),
-            placeholder: const AssetImage('assets/images/weather.gif'),
+          FadeInImage.assetNetwork(
+            placeholder:'assets/images/weather.gif', 
+            image:  'https://openweathermap.org/img/wn/$urlImg@2x.png' , 
+            fit: BoxFit.fill,
             width: size.height * 0.05,
             height: size.height * 0.05,
           ),
+          // FadeInImage(
+          //   image: NetworkImage(
+          //     'https://openweathermap.org/img/wn/$urlImg@2x.png',
+          //     scale: 1
+          //   ),
+          //   placeholder: const AssetImage('assets/images/weather.gif'),
+          //   width: size.height * 0.05,
+          //   height: size.height * 0.05,
+          // ),
           Center(
             child: Text(
               Utils.roundOutGrades( temp ).toString(),

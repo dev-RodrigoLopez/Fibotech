@@ -28,10 +28,15 @@ class CardWeatherCity extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            FadeInImage(
-              image: NetworkImage('https://openweathermap.org/img/wn/${weatherModel.current.weather[0].icon}@2x.png'),
-              placeholder: const AssetImage('assets/images/weather.gif')
+            FadeInImage.assetNetwork(
+              placeholder: 'assets/images/weather.gif', 
+              image:  'https://openweathermap.org/img/wn/${weatherModel.current.weather[0].icon}@2x.png' , 
+              fit: BoxFit.fill,
             ),
+            // FadeInImage(
+            //   image: NetworkImage('https://openweathermap.org/img/wn/${weatherModel.current.weather[0].icon}@2x.png'),
+            //   placeholder: const AssetImage('assets/images/weather.gif')
+            // ),
             // Image.asset('assets/images/clima.png'),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,

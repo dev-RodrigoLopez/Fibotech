@@ -30,7 +30,7 @@ class HomeRestProvider {
       // print( convert );
 
       final responseData = await Dio().get<dynamic>(
-        'https://api.openweathermap.org/data/3.0/onecall?lat=${location.latitude}&lon=${location.longitude}&units=$units&exclude=hourly,&appid=${EnvVariables.api_key_weather}',
+        'https://api.openweathermap.org/data/3.0/onecall?lat=${location.latitude}&lon=${location.longitude}&units=$units&exclude=hourly,&appid=${EnvVariables.apiKeyWeather}',
       );
 
       //  final respData = json.decode( responseData.data );
@@ -78,7 +78,7 @@ class HomeRestProvider {
       for( final popularWeather in lPopularWeather ){
 
         final responseData = await Dio().get<dynamic>(
-          'https://api.openweathermap.org/data/3.0/onecall?lat=${popularWeather.lat}&lon=${popularWeather.lon}&units=$units&exclude=hourly,&appid=${EnvVariables.api_key_weather}',
+          'https://api.openweathermap.org/data/3.0/onecall?lat=${popularWeather.lat}&lon=${popularWeather.lon}&units=$units&exclude=hourly,&appid=${EnvVariables.apiKeyWeather}',
         );
         final response = WeatherModel.fromMap( responseData.data );
         final currentCopy = response.current.copyWith(

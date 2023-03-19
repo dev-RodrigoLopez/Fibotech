@@ -26,7 +26,7 @@ class WeatherRestProvider {
       for( var index = 0; index < lWeatherOB.length; index++ ){
 
         final responseData = await Dio().get<dynamic>(
-          'https://api.openweathermap.org/data/3.0/onecall?lat=${lWeatherOB[index].latitude}&lon=${lWeatherOB[index].longitude}&units=$units&exclude=hourly,&appid=${EnvVariables.api_key_weather}',
+          'https://api.openweathermap.org/data/3.0/onecall?lat=${lWeatherOB[index].latitude}&lon=${lWeatherOB[index].longitude}&units=$units&exclude=hourly,&appid=${EnvVariables.apiKeyWeather}',
         );
         final response = WeatherModel.fromMap( responseData.data );
         final currentCopy = response.current.copyWith(

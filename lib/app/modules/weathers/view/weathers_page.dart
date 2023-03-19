@@ -3,6 +3,7 @@ import 'package:fibotech/app/modules/weathers/widgets/empty_widget.dart';
 import 'package:fibotech/app/modules/weathers/widgets/loading_weathers.dart';
 import 'package:fibotech/app/modules/weathers/widgets/success_widget.dart';
 import 'package:fibotech/data/enums.dart';
+import 'package:fibotech/widgets/page_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -47,9 +48,12 @@ class _WeathersListPageState extends State<WeathersListPage> {
             case WeatherPageStatus.loading:
               return const LoadingWeathers();
             case WeatherPageStatus.notSuccess:
-              return const Center(
-              child: Text('ERROR AL SUBIR', style: TextStyle( color: Colors.white),),
-            );
+              return ErrorWidgetPage(
+                reload: (){
+                  final weatherCubit = context.read<WeatherCubit>();
+                  weatherCubit.reload();
+                },
+              );
             case WeatherPageStatus.success:
               return SuccessPageWeather( lWeather: state.lWeather, );
             case WeatherPageStatus.empty:
