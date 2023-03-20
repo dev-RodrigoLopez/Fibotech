@@ -39,7 +39,6 @@ class _WeathersListPageState extends State<WeathersListPage> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: Colors.white10,
       body: BlocBuilder<WeatherCubit, WeatherState>(
@@ -57,7 +56,7 @@ class _WeathersListPageState extends State<WeathersListPage> {
             case WeatherPageStatus.success:
               return SuccessPageWeather( lWeather: state.lWeather, );
             case WeatherPageStatus.empty:
-              return const EmptyWeatherWidget();
+              return const EmptyWeatherWidget( title:  'No hay Ciudades Guardadas',);
           }
         },
       ),

@@ -19,7 +19,7 @@ class SessionCubit extends Cubit<SessionState> {
 
   Future<void> verifyUser() async {
     if (await Utils.checkPermission()) {
-      final isActivate = await Geolocator.isLocationServiceEnabled();
+      await Geolocator.isLocationServiceEnabled();
 
       if (!inicialitedListener) {
         await changeStatusGps();

@@ -3,6 +3,8 @@
 import 'package:fibotech/app/modules/detail/view/detail_weather.dart';
 import 'package:fibotech/app/modules/home/view/home_page.dart';
 import 'package:fibotech/app/modules/permission/view/permission_page.dart';
+import 'package:fibotech/app/modules/search/view/search_page.dart';
+import 'package:fibotech/app/modules/splash/splash_page.dart';
 import 'package:fibotech/app/modules/weathers/view/weathers_page.dart';
 import 'package:fibotech/core/values/const_page_names.dart';
 import 'package:fibotech/data/model/weather_rest_model.dart';
@@ -38,9 +40,15 @@ Route<dynamic> Function(RouteSettings) get routes => (RouteSettings settings) {
             settings: RouteSettings(name: settings.name),
           );
           break;
+        case PageNames.search:
+          route = MaterialPageRoute<dynamic>(
+            builder: (_) => const SearchPage(),
+            settings: RouteSettings(name: settings.name),
+          );
+          break;
         default:
           route = MaterialPageRoute<dynamic>(
-            builder: (_) => const PermissionPage(),
+            builder: (_) => const SplashPage(),
             settings: RouteSettings(name: settings.name),
           );
           break;

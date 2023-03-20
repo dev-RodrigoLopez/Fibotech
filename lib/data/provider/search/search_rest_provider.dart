@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:fibotech/core/utils/env.dart';
 import 'package:fibotech/data/model/city_model.dart';
 import 'package:fibotech/data/provider/home/home_rest_provider.dart';
-import 'package:fibotech/data/provider/weathers/weather_rest_provider.dart';
 import 'package:geolocator/geolocator.dart';
 
 class SearchRestProvider {

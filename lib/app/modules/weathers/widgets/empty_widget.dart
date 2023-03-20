@@ -2,7 +2,12 @@ import 'package:fibotech/widgets/search_widget.dart';
 import 'package:flutter/material.dart';
 
 class EmptyWeatherWidget extends StatelessWidget {
-  const EmptyWeatherWidget({super.key});
+  const EmptyWeatherWidget({
+    required this.title,
+    super.key
+  });
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -42,7 +47,7 @@ class EmptyWeatherWidget extends StatelessWidget {
           ),
           Center(
             child: Text(
-              'No hay Ciudades Guardadas',
+              title,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,

@@ -1,7 +1,6 @@
 import 'package:fibotech/core/utils/env.dart';
 import 'package:fibotech/objectbox.g.dart';
 import 'package:objectbox/objectbox.dart' as objectbox;
-import 'package:objectbox/objectbox.dart';
 import 'package:path/path.dart' as path;
 import 'package:path_provider/path_provider.dart' as path_provider;
 

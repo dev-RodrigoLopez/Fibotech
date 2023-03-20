@@ -193,7 +193,7 @@ class Current {
         'wind_speed': windSpeed,
         'wind_deg': windDeg,
         'wind_gust': windGust,
-        'weather': List<dynamic>.from(weather!.map((x) => x.toMap())),
+        'weather': List<dynamic>.from(weather.map((x) => x.toMap())),
     };
 }
 

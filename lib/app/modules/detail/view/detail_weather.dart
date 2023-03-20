@@ -2,6 +2,7 @@ import 'package:fibotech/app/modules/detail/cubit/detail_cubit.dart';
 import 'package:fibotech/app/modules/detail/widgets/card_detail_widget.dart';
 import 'package:fibotech/app/modules/detail/widgets/daily_widget.dart';
 import 'package:fibotech/app/modules/detail/widgets/icon_weather_widget.dart';
+import 'package:fibotech/core/singleton/notification_singleton.dart';
 import 'package:fibotech/core/utils/utils.dart';
 import 'package:fibotech/data/model/weather_model_ob.dart';
 import 'package:fibotech/data/model/weather_rest_model.dart';
@@ -94,6 +95,12 @@ class _DetailWeatherState extends State<DetailWeather> {
                                   setState(() {
                                     idselected = 1;
                                   });
+                                  await NotificationToastSingleton.makeToast(
+                                    subTitle: '',
+                                    title: 'Guardado en favoritos',
+                                    topcoustom: size.height *0.01,
+                                    onpress: () async {},
+                                  );
                                 } else { 
 
                                   final detailCubit = context.read<DetailCubit>();
@@ -101,6 +108,12 @@ class _DetailWeatherState extends State<DetailWeather> {
                                   setState(() {
                                     idselected = 0;
                                   });
+                                  await NotificationToastSingleton.makeToast(
+                                    subTitle: '',
+                                    title: 'Eliminado de favoritos',
+                                    topcoustom: size.height * 0.01,
+                                    onpress: () async {},
+                                  );
 
                                 }
 

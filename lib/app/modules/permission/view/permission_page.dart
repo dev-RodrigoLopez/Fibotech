@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:fibotech/app/modules/home/cubit/home_cubit.dart';
 import 'package:fibotech/app/modules/permission/cubit/permission_page_cubit.dart';
 import 'package:fibotech/core/mixin/after_first_layout_mixin.dart';
 import 'package:fibotech/data/enums.dart';
@@ -34,57 +33,63 @@ class _PermissionPageState extends State<PermissionPage>  with AfterFirstLayoutM
     return  BlocProvider(
       create: (context) => PagePermissionCubit(sessionCubit: context.read<SessionCubit>(), controller: controller, ),
       child: Scaffold(
-          appBar: AppBar(title: const Text('Permisos')),
-          body: BlocBuilder<PagePermissionCubit, PagePermissionState>(
-            builder: (context, state) {
-               cubit = context.read<PagePermissionCubit>();
-              
-              switch(state.statusPermission){
-                case GpsPermissionStatus.successFull:
-                  return const SizedBox();                                    
-                case GpsPermissionStatus.pure:
-                  return PageView(              
-                    controller: controller,                                                                                       
-                    physics: const NeverScrollableScrollPhysics(),
-                    children:  [              
-                      PageViewItem(
-                        svg: 'assets/svg/permision_svg_1.svg',
-                        description: 'ITeam recopila datos de la ubicación para permitir el seguimiento del proceso de toma de asistencia, es necesario para mostrar tus tiendas en el mapa y en la recolección correcta de información para la toma de asistencia incluso cuando la aplicación esté en segundo plano o no esté en uso.',
-                        changedPage:() async{
-                          await cubit.getPermissionStatus(controller: controller);
-                          if(Platform.isAndroid)return;                              
-                          
-                        },
-                      ),                  
-                      PageViewItem(
-                        svg: 'assets/svg/permision_svg_2.svg',
-                        description: 'ITeam',
-                        changedPage: () async{        
-                          await cubit.getAppTransparency(); 
-                        },                          
-                      ),                                                                  
-                    ],
-                  );
-                  case GpsPermissionStatus.notactivated:
-                  return  Container(
-                    margin:  EdgeInsets.symmetric(vertical: size.height < 750 ? 50 : 100 ),
-                    child: ContainerBoxCard(                      
-                      child: Column(
-                        children: [
-                          const Text('Activa tu gps '),
-                          Expanded(child: SvgPicture.asset('assets/svg/permision_svg_3.svg',height: 180,)),
-                        ],
-                      ),
-                    ),
-                  );        
-
-                  default:
-                  return const Center(child:  CircularProgressIndicator());
-
+        backgroundColor: Colors.white12,
+        body: Padding(
+          padding:  EdgeInsets.symmetric( horizontal: 5, vertical: size.height * 0.2 ),
+          child: SizedBox(
+            height: size.height * 0.6,
+            child: BlocBuilder<PagePermissionCubit, PagePermissionState>(
+              builder: (context, state) {
+                  cubit = context.read<PagePermissionCubit>();
                 
+                switch(state.statusPermission){
+                  case GpsPermissionStatus.successFull:
+                    return const SizedBox();                                    
+                  case GpsPermissionStatus.pure:
+                    return PageView(              
+                      controller: controller,                                                                                       
+                      physics: const NeverScrollableScrollPhysics(),
+                      children:  [              
+                        PageViewItem(
+                          svg: 'assets/svg/permision_svg_1.svg',
+                          description: 'Weather App recopila datos de la ubicación para permitir consultar el clima de tu posicion de manera correcta. ',
+                          changedPage:() async{
+                            await cubit.getPermissionStatus(controller: controller);
+                            if(Platform.isAndroid)return;                              
+                            
+                          },
+                        ),                  
+                        PageViewItem(
+                          svg: 'assets/svg/permision_svg_2.svg',
+                          description: 'Weather App',
+                          changedPage: () async{        
+                            await cubit.getAppTransparency(); 
+                          },                          
+                        ),                                                                  
+                      ],
+                    );
+                    case GpsPermissionStatus.notactivated:
+                    return  Container(
+                      margin:  EdgeInsets.symmetric(vertical: size.height < 750 ? 50 : 100 ),
+                      child: ContainerBoxCard(                      
+                        child: Column(
+                          children: [
+                            const Text('Activa tu gps '),
+                            Expanded(child: SvgPicture.asset('assets/svg/permision_svg_3.svg',height: 180,)),
+                          ],
+                        ),
+                      ),
+                    );        
+
+                    default:
+                    return const Center(child:  CircularProgressIndicator());
+
+                  
+                }
               }
-            }
-          ,),
+            ,),
+          ),
+        ),
         ),
     );
     
@@ -117,18 +122,23 @@ class PageViewItem extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Flexible(
-              flex: description.length > 250 ?   4 : 2,
+              flex: description.length > 250 ?   4 : 4,
               child: Text(description),
             ),          
             Expanded(
                 flex: description.length > 250 ?   2 : 9,
               child: SvgPicture.asset(svg,height: 180,),            
             ),          
-            Expanded(
-              
-              child: MaterialButton(
-                onPressed: changedPage,
-                child: const Text('Conceder Permiso'),
+            MaterialButton(
+              // height: 100,
+              color: Colors.blue,
+              onPressed: changedPage,
+              child: const Text(
+                'Conceder Permiso',
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.white
+                ),
               ),
             )          
           ],

@@ -1,4 +1,5 @@
 import 'package:fibotech/core/mixin/after_first_layout_mixin.dart';
+import 'package:fibotech/core/singleton/notification_singleton.dart';
 import 'package:fibotech/core/singleton/store_singleton.dart';
 import 'package:fibotech/core/singleton/user_preferences_singletons.dart';
 import 'package:fibotech/data/enums.dart';
@@ -19,6 +20,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver, AfterFirstLa
   final _navigatorKey = GlobalKey<NavigatorState>();
   late SessionCubit sessionCubit;
   NavigatorState get _navigator => _navigatorKey.currentState!;
+  final _messengerKey = GlobalKey<ScaffoldMessengerState>();
 
   @override
   Future<void> onAfterFirstLayout() async {
@@ -30,6 +32,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver, AfterFirstLa
 
   void initSingleton({required BuildContext buildContext}) {
     sessionCubit = buildContext.read<SessionCubit>();
+    NotificationToastSingleton.scaffoldMessengerKey = _messengerKey;
   }
 
   @override
@@ -50,6 +53,7 @@ class _MyAppState extends State<MyApp> with WidgetsBindingObserver, AfterFirstLa
             debugShowCheckedModeBanner: false,
             navigatorKey: _navigatorKey,
             onGenerateRoute: routes,
+            scaffoldMessengerKey: _messengerKey,
             builder: (context, child) {
             initSingleton(buildContext: context);
               return MultiBlocListener(

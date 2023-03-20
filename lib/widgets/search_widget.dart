@@ -1,4 +1,4 @@
-import 'package:fibotech/app/modules/search/view/search_page.dart';
+import 'package:fibotech/core/values/const_page_names.dart';
 import 'package:flutter/material.dart';
 
 
@@ -10,7 +10,11 @@ class SearchWidget extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: (){
-        showSearch( context: context, delegate: WeatherSearchDelegate());
+        Navigator.pushNamed(
+          context,
+          PageNames.search,
+        );
+        // showSearch( context: context, delegate: WeatherSearchDelegate());
       },
       child: Container(
         width: size.width,
